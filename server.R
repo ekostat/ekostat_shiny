@@ -2,11 +2,20 @@
 
 library(shiny)
 library(dplyr)
+source("ReadIndicatorParms.R")
+source("CalculateIndicator.R")
+#source("serverFunctions.R")
+source("Assessment.R")
+
+
 
 shinyServer(function(input, output) {
   # missing code
   
-  df.select <- reactiveValues(data = NULL)
+  # df.select <- reactiveValues(data = NULL)
+  # df.resultsQE <- reactiveValues(data = NULL)
+  # df.resultsOverall <- reactiveValues(data = NULL)
+  
   
   df<-read.table("data/data.txt", fileEncoding = "UTF-8", sep=";", stringsAsFactors=F, header=T)
   df.wb<-read.table("data/waterbodies.txt", fileEncoding = "UTF-8", sep="\t", stringsAsFactors=F, header=T)
@@ -24,14 +33,30 @@ shinyServer(function(input, output) {
     output$nrows <- renderUI({
       tagList(p(renderText(paste0("Loaded: ",n, " rows of data."))))
     })
-  })
+    
+    df.resultsQE<-Assessment(df.select)[[1]]
+    df.resultsOverall<-Assessment(df.select)[[2]]
+    
+    output$resTableQE <- renderUI({ 
+      if(is.data.frame(df.resultsQE)){
+        return(tagList(renderTable(df.resultsQE)))
+      }
+    })
+    
+    output$resTableOverall <- renderUI({ 
+      if(is.data.frame(df.resultsOverall)){
+        return(tagList(renderTable(df.resultsOverall)))
+      }
+    })  })
   
   datacount<- reactive({
       nrow(filter(df, WB %in% input$waterbody))
   })
   
-
   
+  outputdata <- reactive({
+    df.select
+  })
 
   
   #value <- reactiveValues(0)
@@ -78,6 +103,8 @@ shinyServer(function(input, output) {
       tagList(actionButton("goButton", "Get data"))
     }
   })
+  
+  
   
 })
 

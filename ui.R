@@ -57,9 +57,11 @@ shinyUI(
       navlistPanel(
         widths=c(2,10),well=F,
         tabPanel("Overall",
-                 "Overall Results"),
+                 "Overall Results",
+                 uiOutput("resTableOverall")),
         tabPanel("Quality Element",
-                 "QE Results"),
+                 "QE Results",
+                 uiOutput("resTableQE")),
         tabPanel("Indicator",
                  "Indicator Results")
       ),
