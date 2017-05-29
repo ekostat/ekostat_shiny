@@ -3,20 +3,26 @@ library(shiny)
 # Define UI for random distribution application 
 shinyUI(
   navbarPage(
-    title="WATERS Assessment", 
+    windowTitle="WATERS",
+    #title=div(img(src="waters_1.gif"), "WATERS Assessment"), 
+    title= "WATERS Assessment", 
     tabPanel("Data",
              navlistPanel(
                widths=c(2,10),well=F,
                tabPanel(
                  "New",
                  p(strong("New Assessment")),
-                 p("Select waterbodies and dowload data from database(s)."),
-                 p("Include own data?"),
+                 #p("Select waterbodies and download data from database(s)."),
+                 p("Select waterbodies"),
                  uiOutput("selectWaterDistrict"),
+                 uiOutput("selectPeriod"),
                  uiOutput("selectWaterBodies"),
-                 actionButton("goButton", "Download data")
+                 uiOutput("dataButton"),
+                 uiOutput("nrows")
+                 #actionButton("goButton", "Get data")
+                 #conditionalPanel(condition = "input.waterbody != ''",)
                ),
-               tabPanel("Load",
+               tabPanel("Open",
                         fileInput('file1', 'Load existing assessment',
                                   accept=c('text/csv', 
                                            'text/comma-separated-values,text/plain', 
@@ -33,12 +39,16 @@ shinyUI(
       "Options",
       navlistPanel(
         widths=c(2,10),well=F,
+        tabPanel("Monte Carlo",
+                 "Options for Monte Carlo simulations.",
+                 numericInput("n",
+                              label = "Number of simulations", 
+                              value = 1000)   
+                 ),
         tabPanel("Uncertainty",
                  "Uncertainty Library"),
         tabPanel("Aggregation",
-                 "Aggregation methods"),
-        tabPanel("Monte Carlo",
-                 "Options for Monte Carlo simulations.")
+                 "Aggregation methods")
       )
     ),
     
@@ -46,12 +56,12 @@ shinyUI(
       "Results",
       navlistPanel(
         widths=c(2,10),well=F,
-        tabPanel("Indicator",
-                 "Indicator Results"),
+        tabPanel("Overall",
+                 "Overall Results"),
         tabPanel("Quality Element",
                  "QE Results"),
-        tabPanel("Overall",
-                 "Overall Results")
+        tabPanel("Indicator",
+                 "Indicator Results")
       ),
       
       fluidRow(column(width=12,
