@@ -43,7 +43,7 @@ shinyUI(
                  "Options for Monte Carlo simulations.",
                  numericInput("n",
                               label = "Number of simulations", 
-                              value = 1000)   
+                              value = 100)   
                  ),
         tabPanel("Uncertainty",
                  "Uncertainty Library"),
@@ -63,7 +63,8 @@ shinyUI(
                  "QE Results",
                  uiOutput("resTableQE")),
         tabPanel("Indicator",
-                 "Indicator Results")
+                 "Indicator Data",
+                 uiOutput("resTableInd"))
       ),
       
       fluidRow(column(width=12,

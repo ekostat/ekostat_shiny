@@ -1,0 +1,136 @@
+Indicator	Type	UseEQR	Ref	HG	GM	MP	PB	Months	Param	Comment	QE	QualityElement
+chla	1n	0	1.3	1.7	2.1	3.7	6.7	06:08	chla		1	Plankton
+chla	1s	0	1.6	2.1	2.8	4.6	8	06:08	chla		1	Plankton
+chla	2	0	1.9	2.4	3.6	5.6	8.3	06:08	chla		1	Plankton
+chla	3	0	1.1	1.4	1.8	3.5	6.2	06:08	chla		1	Plankton
+chla	4	0	1	1.2	1.5	3	6	06:08	chla		1	Plankton
+chla	5	0	1	1.2	1.5	3	6	06:08	chla		1	Plankton
+chla	6	0	0.9	1.1	1.5	2.4	4.9	06:08	chla		1	Plankton
+chla	7	0	1.2	1.5	1.8	3.4	8	06:08	chla		1	Plankton
+chla	8	0	1.2	1.5	1.8	3.4	8	06:08	chla		1	Plankton
+chla	9	0	1.2	1.5	1.8	3.4	8	06:08	chla		1	Plankton
+chla	10	0	1.2	1.5	1.8	3.4	8	06:08	chla		1	Plankton
+chla	11	0	1.2	1.5	1.8	3.4	8	06:08	chla		1	Plankton
+chla	12n	0	1.2	1.5	1.8	3.4	8	06:08	chla		1	Plankton
+chla	12s	0	1.2	1.5	1.8	3.4	8	06:08	chla		1	Plankton
+chla	13	0	1.2	1.5	1.8	3.4	8	06:08	chla		1	Plankton
+chla	14	0	1.2	1.5	1.8	3.4	8	06:08	chla		1	Plankton
+chla	15	0	1.2	1.5	1.8	3.4	8	06:08	chla		1	Plankton
+chla	16	0	1.4	1.8	2.3	4.3	10.1	06:08	chla		1	Plankton
+chla	17	0	1.2	1.5	2	3.7	8.7	06:08	chla		1	Plankton
+chla	18	0	1.4	1.8	2.3	4.3	10.1	06:08	chla		1	Plankton
+chla	19	0	1.2	1.5	2	3.7	8.7	06:08	chla		1	Plankton
+chla	20	0	1.2	1.8	2.3	4.3	10.1	06:08	chla		1	Plankton
+chla	21	0	1.1	1.5	2	3.7	8.7	06:08	chla		1	Plankton
+chla	22	0	1.2	1.8	2.3	4.3	10.1	06:08	chla		1	Plankton
+chla	23	0	1.1	1.5	2	3.7	8.7	06:08	chla		1	Plankton
+chla	24	0	1.2	1.5	1.8	3.4	8	06:08	chla		1	Plankton
+chla	25	0	1.8	2.1	2.7	4.1	6.5	06:08	chla		1	Plankton
+secchi	1n	1	10.5	0.81	0.67	0.48	0.29					
+secchi	1s	1	8	0.81	0.69	0.5	0.38					
+secchi	2	1	8	0.81	0.63	0.44	0.31					
+secchi	3	1	12	0.83	0.67	0.42	0.29					
+secchi	4	1	10.5	0.9	0.76	0.48	0.33					
+secchi	5	1	10.5	0.9	0.76	0.48	0.33					
+secchi	6	1	10	0.8	0.75	0.45	0.3					
+secchi	7	1	10	0.83	0.7	0.4	0.2					
+secchi	8	1	10	0.83	0.7	0.4	0.2					
+secchi	9	1	10	0.83	0.7	0.4	0.2					
+secchi	10	1	10	0.83	0.7	0.4	0.2					
+secchi	11	1	10	0.83	0.7	0.4	0.2					
+secchi	12n	1	10	0.83	0.7	0.4	0.2					
+secchi	12s	1	10	0.83	0.7	0.4	0.2					
+secchi	13	1	10	0.83	0.7	0.4	0.2					
+secchi	14	1	10	0.83	0.7	0.4	0.2					
+secchi	15	1	10	0.83	0.7	0.4	0.2					
+secchi	16	1	7	0.83	0.7	0.4	0.2					
+secchi	17	1	10	0.83	0.7	0.4	0.2					
+secchi	18	1	7	0.67	0.44	0.3	0.2					
+secchi	19	1	9	0.67	0.44	0.23	0.19					
+secchi	20	1	6.3	0.67	0.44	0.3	0.19					
+secchi	21	1	8.8	0.67	0.44	0.3	0.19					
+secchi	22	1	5.4	0.67	0.44	0.3	0.2					
+secchi	23	1	7.5	0.67	0.44	0.29	0.2					
+secchi	24	1	10	0.83	0.7	0.4	0.2					
+secchi	25	1	4.5	0.89	0.67	0.45	0.11					
+TNwinter	1n	1	1	0.88	0.79	0.6	0.43	1,2,12	tn		5	Supporting elements
+TNwinter	1s	1	1	0.88	0.79	0.6	0.43				5	Supporting elements
+TNwinter	2	1	1	0.88	0.79	0.6	0.43				5	Supporting elements
+TNwinter	3	1	1	0.88	0.79	0.6	0.43				5	Supporting elements
+TNwinter	4	1	1	0.88	0.79	0.6	0.43				5	Supporting elements
+TNwinter	5	1	1	0.89	0.77	0.61	0.43				5	Supporting elements
+TNwinter	6	1	1	0.89	0.77	0.61	0.43				5	Supporting elements
+TNwinter	7	1	1	0.91	0.84	0.67	0.5				5	Supporting elements
+TNwinter	8	1	1	0.91	0.84	0.67	0.5				5	Supporting elements
+TNwinter	9	1	1	0.91	0.84	0.67	0.5				5	Supporting elements
+TNwinter	10	1	1	0.89	0.85	0.65	0.5				5	Supporting elements
+TNwinter	11	1	1	0.89	0.85	0.65	0.5				5	Supporting elements
+TNwinter	12n	1	1	0.93	0.85	0.68	0.51				5	Supporting elements
+TNwinter	12s	1	1	0.91	0.83	0.66	0.5				5	Supporting elements
+TNwinter	13	1	1	0.91	0.83	0.66	0.5				5	Supporting elements
+TNwinter	14	1	1	0.91	0.83	0.66	0.5				5	Supporting elements
+TNwinter	15	1	1	0.93	0.85	0.68	0.51				5	Supporting elements
+TNwinter	16	1	1	0.93	0.85	0.68	0.51				5	Supporting elements
+TNwinter	17	1	1	0.93	0.85	0.68	0.51				5	Supporting elements
+TNwinter	18	1	1	0.91	0.83	0.66	0.5				5	Supporting elements
+TNwinter	19	1	1	0.91	0.83	0.66	0.5				5	Supporting elements
+TNwinter	20	1	1	0.91	0.83	0.67	0.5				5	Supporting elements
+TNwinter	21	1	1	0.91	0.83	0.67	0.5				5	Supporting elements
+TNwinter	22	1	1	0.93	0.85	0.68	0.51				5	Supporting elements
+TNwinter	23	1	1	0.93	0.85	0.68	0.51				5	Supporting elements
+TNwinter	24	1	1	0.93	0.85	0.68	0.51				5	Supporting elements
+TNwinter	25	1	1	0.88	0.79	0.6	0.43				5	Supporting elements
+tp_winter	1n	1	1	0.85	0.74	0.53	0.36				5	Supporting elements
+tp_winter	1s	1	1	0.87	0.78	0.58	0.41				5	Supporting elements
+tp_winter	2	1	1	0.85	0.74	0.53	0.36				5	Supporting elements
+tp_winter	3	1	1	0.85	0.74	0.53	0.36				5	Supporting elements
+tp_winter	4	1	1	0.87	0.78	0.58	0.41				5	Supporting elements
+tp_winter	5	1	1	0.88	0.78	0.58	0.41				5	Supporting elements
+tp_winter	6	1	1	0.88	0.78	0.58	0.41				5	Supporting elements
+tp_winter	7	1	1	0.82	0.69	0.47	0.31				5	Supporting elements
+tp_winter	8	1	1	0.82	0.69	0.47	0.31				5	Supporting elements
+tp_winter	9	1	1	0.82	0.69	0.47	0.31				5	Supporting elements
+tp_winter	10	1	1	0.8	0.68	0.45	0.29				5	Supporting elements
+tp_winter	11	1	1	0.8	0.68	0.45	0.29				5	Supporting elements
+tp_winter	12n	1	1	0.8	0.66	0.43	0.28				5	Supporting elements
+tp_winter	12s	1	1	0.8	0.66	0.43	0.28				5	Supporting elements
+tp_winter	13	1	1	0.8	0.66	0.43	0.28				5	Supporting elements
+tp_winter	14	1	1	0.8	0.66	0.43	0.28				5	Supporting elements
+tp_winter	15	1	1	0.8	0.66	0.43	0.28				5	Supporting elements
+tp_winter	16	1	1	0.83	0.71	0.51	0.34				5	Supporting elements
+tp_winter	17	1	1	0.83	0.71	0.51	0.34				5	Supporting elements
+tp_winter	18	1	1	0.83	0.71	0.51	0.34				5	Supporting elements
+tp_winter	19	1	1	0.83	0.71	0.51	0.34				5	Supporting elements
+tp_winter	20	1	1	0.78	0.64	0.42	0.26				5	Supporting elements
+tp_winter	21	1	1	0.78	0.64	0.42	0.26				5	Supporting elements
+tp_winter	22	1	1	0.78	0.64	0.42	0.26				5	Supporting elements
+tp_winter	23	1	1	0.78	0.64	0.42	0.26				5	Supporting elements
+tp_winter	24	1	1	0.8	0.66	0.43	0.28				5	Supporting elements
+tp_winter	25	1	1	0.87	0.78	0.58	0.41				5	Supporting elements
+TNsummer	1n	1	1	0.88	0.79	0.6	0.43				5	Supporting elements
+TNsummer	1s	1	1	0.87	0.77	0.57	0.4				5	Supporting elements
+TNsummer	2	1	1	0.88	0.79	0.6	0.43				5	Supporting elements
+TNsummer	3	1	1	0.88	0.79	0.6	0.43				5	Supporting elements
+TNsummer	4	1	1	0.87	0.77	0.57	0.4				5	Supporting elements
+TNsummer	5	1	1	0.87	0.77	0.57	0.4				5	Supporting elements
+TNsummer	6	1	1	0.87	0.77	0.57	0.4				5	Supporting elements
+TNsummer	7	1	1	0.86	0.77	0.55	0.38				5	Supporting elements
+TNsummer	8	1	1	0.86	0.77	0.55	0.38				5	Supporting elements
+TNsummer	9	1	1	0.86	0.77	0.55	0.38				5	Supporting elements
+TNsummer	10	1	1	0.88	0.79	0.56	0.38				5	Supporting elements
+TNsummer	11	1	1	0.88	0.79	0.56	0.38				5	Supporting elements
+TNsummer	12n	1	1	0.87	0.78	0.56	0.38				5	Supporting elements
+TNsummer	12s	1	1	0.87	0.78	0.56	0.39				5	Supporting elements
+TNsummer	13	1	1	0.87	0.78	0.56	0.39				5	Supporting elements
+TNsummer	14	1	1	0.87	0.78	0.56	0.39				5	Supporting elements
+TNsummer	15	1	1	0.87	0.78	0.56	0.38				5	Supporting elements
+TNsummer	16	1	1	0.86	0.76	0.56	0.39				5	Supporting elements
+TNsummer	17	1	1	0.86	0.76	0.56	0.39				5	Supporting elements
+TNsummer	18	1	1	0.85	0.75	0.55	0.38				5	Supporting elements
+TNsummer	19	1	1	0.85	0.75	0.55	0.38				5	Supporting elements
+TNsummer	20	1	1	0.88	0.78	0.57	0.39				5	Supporting elements
+TNsummer	21	1	1	0.88	0.78	0.57	0.39				5	Supporting elements
+TNsummer	22	1	1	0.86	0.76	0.55	0.39				5	Supporting elements
+TNsummer	23	1	1	0.86	0.76	0.55	0.39				5	Supporting elements
+TNsummer	24	1	1	0.87	0.78	0.56	0.38				5	Supporting elements
+TNsummer	25	1	1	0.87	0.77	0.57	0.4				5	Supporting elements
