@@ -17,7 +17,10 @@ source("ReadIndicatorParms.R")
 source("CalculateIndicator.R")
 
 # Read data set for specific waterbody and period
-df <- ReadMonitoringDataSMHI("data/Gullmarn_2007_2012.sas7bdat")
+#df <- ReadMonitoringDataSMHI("data/Gullmarn_2007_2012.sas7bdat")
+df <- ReadMonitoringDataSMHI("data/danafjord_2013_2016.sas7bdat")
+
+
 # Read general parameters for the indicator
 parmlist <- ReadParms_chla()
 # Calculate the indicator
