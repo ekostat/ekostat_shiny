@@ -7,7 +7,6 @@ library(extrafont)
 loadfonts(quiet = TRUE)
 theme_set(theme_bw(base_size = 12, base_family = "Open Sans"))
 
-# source("R/extract_modis.R") # ATTENTION: takes few minutes
 
 # Clean the workspace
 rm(list = ls())
