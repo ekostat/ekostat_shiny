@@ -1,0 +1,22 @@
+QEtype	QualityElement	QualitySubelement	Indicator	Measurement
+Biological	Phytoplankton	Phytoplankton biomass	Chla	Chlorophyll a
+Biological	Phytoplankton	Phytoplankton biomass	ChlaEQR	Chlorophyll a
+Biological	Phytoplankton	Phytoplankton biomass	Biovol	Phytoplankton biovolume
+Biological	Phytoplankton	Phytoplankton biomass	BiovolEQR	Phytoplankton biovolume
+Biological	Benthic fauna	Composition and diversity	BQI	BQI
+Biological	Benthic vegetation	Composition and abundance	MSMDI	MSMDI
+Supporting	Water transparency	Secchi depth	Secchi	Secchi depth
+Supporting	Water transparency	Secchi depth	SecchiEQR	Secchi depth
+Supporting	Nutrients	Nitrogen	DINsummer	Dissolved inorganic Nitrogen
+Supporting	Nutrients	Nitrogen	TNsummer	Total Nitrogen
+Supporting	Nutrients	Nitrogen	TNwinter	Total Nitrogen
+Supporting	Nutrients	Phosphorus	DIPsummer	Dissolved inorganic Phosphorus
+Supporting	Nutrients	Phosphorus	TPsummer	Total Phosphorus
+Supporting	Nutrients	Phosphorus	TPwinter	Total Phosphorus
+Supporting	Nutrients	Nitrogen	DINsummerEQR	Dissolved inorganic Nitrogen
+Supporting	Nutrients	Nitrogen	TNsummerEQR	Total Nitrogen
+Supporting	Nutrients	Nitrogen	TNwinterEQR	Total Nitrogen
+Supporting	Nutrients	Phosphorus	DIPsummerEQR	Dissolved inorganic Phosphorus
+Supporting	Nutrients	Phosphorus	TPsummerEQR	Total Phosphorus
+Supporting	Nutrients	Phosphorus	TPwinterEQR	Total Phosphorus
+
