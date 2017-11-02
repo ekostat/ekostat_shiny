@@ -1,11 +1,11 @@
 library(shiny)
 
+
 # Define UI for random distribution application 
 shinyUI(
-  navbarPage(
-    windowTitle="WATERS",
-    #title=div(img(src="waters_1.gif"), "WATERS Assessment"), 
-    title= "WATERS Assessment", 
+  navbarPage(id = "inTabset",
+             windowTitle="WATERS Status Assessment Tool",
+    title=div(img(src="waters_2.gif")), 
     tabPanel("Data",
              navlistPanel(
                widths=c(2,10),well=F,
@@ -44,7 +44,7 @@ shinyUI(
                  numericInput("n",
                               label = "Number of simulations", 
                               value = 100)   
-                 ),
+        ),
         tabPanel("Uncertainty",
                  "Uncertainty Library"),
         tabPanel("Aggregation",
@@ -68,7 +68,7 @@ shinyUI(
       ),
       
       fluidRow(column(width=12,
-        downloadButton('downloadReport', label="Download report")
+                      downloadButton('downloadReport', label="Download report")
       ))
     )
   ))

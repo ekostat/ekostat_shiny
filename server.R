@@ -9,22 +9,33 @@ library(dplyr)
 
 source("ReadIndicatorParms.R")
 source("CalculateIndicator.R")
-#source("serverFunctions.R")
+source("IndicatorFunctions.R")
+source("CalculateIndicatorSupport.R")
 source("Assessment.R")
 source("ReadBounds.R")
+source("ReadIndicatorType.R")
+source("ReadVariances.R")
+
 
 shinyServer(function(input, output) {
   # missing code
   
-  # df.select <- reactiveValues(data = NULL)
-  # df.resultsQE <- reactiveValues(data = NULL)
-  # df.resultsOverall <- reactiveValues(data = NULL)
-  
+#Prepare data
   df<-read.table("data/data.txt", fileEncoding = "UTF-8", sep=";", stringsAsFactors=F, header=T)
   df.wb<-read.table("data/waterbodies.txt", fileEncoding = "UTF-8", sep="\t", stringsAsFactors=F, header=T)
   
-  df<-df %>% left_join(select(df.wb,WaterbodyID,DistrictID), by=c("WB_ID"="WaterbodyID")) 
-  df$WB<-paste0(df$WB_ID," ",df$WB_name)  
+  df[df$WB_name=="Halse/Askeröfj","WB_name"]<-"Halsefjorden"
+  df<-df %>% left_join(select(df.wb,WaterbodyName,WaterbodyID,DistrictID), by=c("WB_name"="WaterbodyName")) 
+  df$WB<-paste0(df$WaterbodyID," ",df$WB_name)  
+  
+  RoundColList<-c("secchi","temp","sali","chla" ,"TP","TN","dens_dif","BQI","MSMDI","logitMSMDI")
+  selection<-c("DistrictID","WB","station","typology","date",
+               "year","period","station_depth","secchi","temp","sali",
+               "chla" ,"TP","TN","dens_dif","springlag","BQI","MSMDI","logitMSMDI")
+  
+  df<-df[,selection]
+  
+  IndList<-c("ChlaEQR","TNsummer","TNwinter","Secchi","MSMDI","BQI")
   
   output$nText <- renderText({
     outText()
@@ -39,7 +50,7 @@ shinyServer(function(input, output) {
     
     nSimMC <- input$n
     
-    AssessmentResults<-Assessment(df.select,nsim=nSimMC)
+    AssessmentResults<-Assessment(df.select,nsim=nSimMC,IndList)
     df.resultsOverall<-AssessmentResults[[1]]
     df.resultsQE<-AssessmentResults[[2]]
     df.resultsInd<-AssessmentResults[[3]]
@@ -122,4 +133,3 @@ shinyServer(function(input, output) {
   
   
 })
-
