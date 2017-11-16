@@ -242,3 +242,30 @@ Coastal	Total Phosphorus	µmol/l	log	Bottenviken	20	Norra Kvarkens inre kustvatt
 Coastal	Total Phosphorus	µmol/l	log	Bottenviken	21	Norra Kvarkens yttre kustvatten											
 Coastal	Total Phosphorus	µmol/l	log	Bottenviken	22	Bottenviken, inre kustvatten											
 Coastal	Total Phosphorus	µmol/l	log	Bottenviken	23	Bottenviken, yttre kustvatten											
+Coastal	Oxygen	ml/l	identity	Västerhavet	1n	Västkustens inre kustvatten											
+Coastal	Oxygen	ml/l	identity	Västerhavet	1s	Västkustens inre kustvatten											
+Coastal	Oxygen	ml/l	identity	Västerhavet	2	Västkustens fjordar											
+Coastal	Oxygen	ml/l	identity	Västerhavet	3	Skagerak, Västkustens yttre kustvatten											
+Coastal	Oxygen	ml/l	identity	Västerhavet	25	Göta Älvs- och Nordre Älvs estuarie											
+Coastal	Oxygen	ml/l	identity	Västerhavet	4	Kattegat, Västkustens yttre kustvatten											
+Coastal	Oxygen	ml/l	identity	Västerhavet	5	Södra Hallands och norra Öresunds kustvatten											
+Coastal	Oxygen	ml/l	identity	Västerhavet	6	Öresunds kustvatten											
+Coastal	Oxygen	ml/l	identity	Egentliga Östersjön	7	Skånes kustvatten											
+Coastal	Oxygen	ml/l	identity	Egentliga Östersjön	8	Blekinge skärgårds och Kalmarsunds inre kustvatten											
+Coastal	Oxygen	ml/l	identity	Egentliga Östersjön	9	Blekinge skärgård, och Kalmarsunds yttre kustvatten											
+Coastal	Oxygen	ml/l	identity	Egentliga Östersjön	10	Östra Ölands, sydöstra Gotlands kustvatten samt Gotska sandön											
+Coastal	Oxygen	ml/l	identity	Egentliga Östersjön	11	Gotlands västra och norra kustvatten											
+Coastal	Oxygen	ml/l	identity	Egentliga Östersjön	12n	Östergötlands samt Stockholms skärgård, mellankustvatten											
+Coastal	Oxygen	ml/l	identity	Egentliga Östersjön	12s	Östergötlands samt Stockholms skärgård, mellankustvatten											
+Coastal	Oxygen	ml/l	identity	Egentliga Östersjön	13	Östergötlands inre skärgård											
+Coastal	Oxygen	ml/l	identity	Egentliga Östersjön	14	Östergötlands, yttre kustvatten											
+Coastal	Oxygen	ml/l	identity	Egentliga Östersjön	15	Stockholms skärgård, yttre kustvatten											
+Coastal	Oxygen	ml/l	identity	Egentliga Östersjön	24	Stockholms inre skärgård og Hallsfjärden											
+Coastal	Oxygen	ml/l	identity	Bottenhavet	16	Södra Bottenhavet, inre kustvatten											
+Coastal	Oxygen	ml/l	identity	Bottenhavet	17	Södra Bottenhavet, yttre kustvatten											
+Coastal	Oxygen	ml/l	identity	Bottenhavet	18	Norra Bottenhavet, Höga kustens inre kustvatten											
+Coastal	Oxygen	ml/l	identity	Bottenhavet	19	Norra Bottenhavet, Höga kustens yttre kustvatten											
+Coastal	Oxygen	ml/l	identity	Bottenviken	20	Norra Kvarkens inre kustvatten											
+Coastal	Oxygen	ml/l	identity	Bottenviken	21	Norra Kvarkens yttre kustvatten											
+Coastal	Oxygen	ml/l	identity	Bottenviken	22	Bottenviken, inre kustvatten											
+Coastal	Oxygen	ml/l	identity	Bottenviken	23	Bottenviken, yttre kustvatten											

@@ -18,7 +18,7 @@
 
 Aggregate<-function(df,level=1,Groups=""){
   # level=1 overall result
-  # level=1 QE type
+  # level=2 QE type (biological / supporting)
   # level=3 QE result
   # level=4 subelement result
   
@@ -41,15 +41,15 @@ Aggregate<-function(df,level=1,Groups=""){
     if(level==3){
       df_res <- EQRclass(df_res)
     }else{
+      df_res$EQR<-ifelse(is.nan(df_res$EQR),NA,df_res$EQR)
       df_min <- df_res %>%
         group_by_(.dots=GroupsType) %>%
         summarise(nInd=sum(nInd,na.rm=TRUE),nSubE=sum(nSubE,na.rm=TRUE),EQR=min(EQR,na.rm=TRUE)) %>%
         ungroup()
-      
+      df_min$EQR<-ifelse(is.infinite(df_min$EQR),NA,df_min$EQR)
       #Join the dataframe with minimum EQR values back to the QE results to get the name of
       # the QE having the lowest EQR.
       # if there are two QE sharing the same minimum value, then we will get two QEs per Group
-      
       df_min <- df_min %>% left_join(select(df_res,-c(nInd,nSubE))) 
       df_min <- df_min %>% rename(Worst=QualityElement)
       
@@ -74,19 +74,23 @@ Aggregate<-function(df,level=1,Groups=""){
           
         df_res1 <- df_gp %>%
          left_join(df_res) %>% 
-          select(-c(nInd,nSubE,EQR,Worst)) %>%
-          spread(key=QEtype,value=Class) %>%
+          select(-c(nInd,nSubE,Worst,Class,EQR)) %>% 
+          spread(key=QEtype,value=ClassID) %>%
           mutate(Supporting2=ifelse(is.na(Supporting),5,ifelse(Supporting<3,3,Supporting))) %>%
-          mutate(Class=ifelse(Biological<Supporting2,Biological,Supporting2)) %>%
+          mutate(ClassID=ifelse(Biological<Supporting2,Biological,Supporting2)) %>%
           select(-c(Supporting2)) %>%
-          rename(ClassBio=Biological,ClassSup=Supporting)
+          rename(ClassIDBio=Biological,ClassIDSup=Supporting)
         df_res2 <- df_gp %>%
           left_join(df_res) %>% 
           mutate(nInd=ifelse(is.na(nInd),0,nInd)) %>%
-          select(-c(Class,nSubE,EQR,Worst)) %>%
+          select(-c(ClassID,nSubE,Worst,Class,EQR)) %>% 
           spread(key=QEtype,value=nInd) %>%
           rename(nIndBio=Biological,nIndSup=Supporting)
         df_res <- left_join(df_res1,df_res2)
+        
+        Categories<-c("Bad","Poor","Mod","Good","High","Ref")
+        df_res$Class<-ifelse(is.na(df_res$ClassID),NA,Categories[df_res$ClassID])
+        
       }
     }
   }
@@ -100,10 +104,15 @@ Aggregate<-function(df,level=1,Groups=""){
 EQRclass<-function(df,varname="EQR"){
   if(length(names(df)[names(df)==varname])>0){
     
-    df$Class<-ifelse(df[,varname]<0.2,1,
+    df$ClassID<-ifelse(is.na(df[,varname]),NA,
+                       ifelse(df[,varname]<0.2,1,
                      ifelse(df[,varname]<0.4,2,
                             ifelse(df[,varname]<0.6,3,
-                                   ifelse(df[,varname]<0.8,4,5))))
+                                   ifelse(df[,varname]<0.8,4,5)))))
+    Categories<-c("Bad","Poor","Mod","Good","High","Ref")
+    #browser()
+    df$Class<-ifelse(is.na(df$ClassID),NA,Categories[df$ClassID])
+    
   }
   return(df)
 }
@@ -156,6 +165,8 @@ Frequency<-function(df,Groups="",varname="Class"){
     mutate(f=ifelse(is.na(f),0,f),prefix="C") %>%
     mutate(ClassID=paste0(prefix,ClassID)) %>%
     select(-prefix)
+  
+  #browser()
   df<-dfn %>% spread(key=ClassID,value=f)
   
   return(df)

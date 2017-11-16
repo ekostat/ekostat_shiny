@@ -37,7 +37,7 @@ Assessment <-
         # Get start and end years from the period text (e.g. "2001-2006")
         startyear<-as.numeric(substr(as.character(plist$period[iPeriod]),1,4))
         endyear<-as.numeric(substr(as.character(plist$period[iPeriod]),6,9))
-        
+
         # Loop through selected indicators
         for(iInd in IndicatorList){
           BoundsList<-df.bounds %>% filter(Type==typology,Indicator==iInd)
@@ -53,8 +53,7 @@ Assessment <-
             }
             
             res<-IndicatorResults(df,typology,df.bounds,df.indicators,df.variances,iInd,startyear,endyear,nsim)
-          
-            if(res$result_code!=-90){
+            if(res$result_code %in% c(0,-1)){
               rm(df.temp)
               df.temp<-data.frame(Mean=res$period$mean,StdErr=res$period$stderr,Code=res$result_code)
               df.temp$Indicator<-iInd
@@ -86,13 +85,46 @@ Assessment <-
               }else{
                 res.rnd<-df.temp
               }
+              
+              if(res$result_code==-1){
+                ErrDesc<-"data <3years"
+                df.temp<-data.frame(WB=wblist$WB[iWB],
+                                    Type=wblist$typology[iWB],
+                                    Period=plist$period[iPeriod],
+                                    Indicator=iInd,
+                                    IndSubtype=subtype,
+                                    Code=res$result_code,
+                                    Error=ErrDesc)
+                if(exists("res.err")){
+                  res.err<-bind_rows(res.err,df.temp)
+                }else{
+                  res.err<-df.temp
+                }
+              }
+              
             }else{ #res$result_code!=0
               #Add to the list of errors
               ErrDesc <- "unspecified"
               if(res$result_code==-1) ErrDesc<-"data <3years"
               if(res$result_code==-90) ErrDesc<-"no data"
+              if(res$result_code==-91) ErrDesc<-"insufficent data"
               
               rm(df.temp)
+              df.temp<-data.frame(Mean=NA,StdErr=NA,Code=res$result_code)
+              df.temp$Indicator<-iInd
+              df.temp$IndSubtype<-subtype
+              df.temp$WB<-wblist$WB[iWB]
+              df.temp$Type<-wblist$typology[iWB]
+              df.temp$Period<-plist$period[iPeriod]
+              df.temp$Code<-res$result_code
+              cat(paste0("Indicator: ",iInd,"  Result: ",res$result_code,"\n"))
+              
+              if(exists("res.ind")){
+                res.ind<-bind_rows(res.ind,df.temp)
+              }else{
+                res.ind<-df.temp
+              }
+              
               df.temp<-data.frame(WB=wblist$WB[iWB],
                                   Type=wblist$typology[iWB],
                                   Period=plist$period[iPeriod],
@@ -105,6 +137,26 @@ Assessment <-
               }else{
                 res.err<-df.temp
               }
+              
+              #Add empty lines to the MC results for the indicators with no data
+              rm(df.temp)
+              Estimate <- rep(NA,nsim)
+              df.temp<-data.frame(Estimate)
+              df.temp$Code=res$result_code
+              df.temp$Indicator<-iInd
+              df.temp$IndSubtype<-subtype
+              df.temp$WB<-wblist$WB[iWB]
+              df.temp$Type<-wblist$typology[iWB]
+              df.temp$Period<-plist$period[iPeriod]
+              df.temp$sim<-1:nsim
+              df.temp$Code<-res$result_code
+              
+              if(exists("res.rnd")){
+                res.rnd<-bind_rows(res.rnd,df.temp)
+              }else{
+                res.rnd<-df.temp
+              }
+              
             }
           }
         } #for(iSub in 1:subcount)
@@ -113,7 +165,7 @@ Assessment <-
     #---------------------- Summarise results --------------------------
     # Get indicator categories based on mean values
     
-    res.ind<- res.ind %>% select(WB,Type,Period,Indicator,IndSubtype,Mean,StdErr)
+    res.ind<- res.ind %>% select(WB,Type,Period,Indicator,IndSubtype,Mean,StdErr,Code)
     res.ind<- res.ind %>% left_join(df.bounds, by=c("Indicator"="Indicator","Type"="Type","IndSubtype"="Depth_stratum"))
     res.ind$Value<-res.ind$Mean
     
@@ -159,6 +211,16 @@ Assessment <-
     res.rnd.count$n<-res.rnd.count$n/nsim
     
     res.rnd.count<-spread(res.rnd.count, ClassID, n, fill = NA)
+  
+    #res.rnd<-res.rnd %>% left_join(res.ind, by=c("Indicator","QualityElement","QualitySubelement","QEtype")) %>% select(-c(Sali_0:Sali_36))
+    
+    res.rnd<-res.rnd %>% left_join(select(res.ind,WB,Type,Period,Indicator,IndSubtype,Mean,StdErr,EQRavg=EQR,ClassAvg=Class), 
+                                   by=c("WB"="WB","Type"="Type","Period"="Period",
+                                     "Indicator"="Indicator","IndSubtype"="IndSubtype")) %>% 
+      select(-c(Sali_0:Sali_36))
+    Categories<-c("Bad","Poor","Mod","Good","High","Ref")
+    res.rnd$Class<-Categories[res.rnd$ClassID]
+    
     res.ind<-left_join(res.ind,res.rnd.count)
     
     res.ind <- res.ind %>% left_join(select(df.indicators,Indicator,QualityElement,QualitySubelement,QEtype))
@@ -168,20 +230,16 @@ Assessment <-
     names(res.ind)[names(res.ind)=="C3"]<-"fMod"
     names(res.ind)[names(res.ind)=="C4"]<-"fGood"
     names(res.ind)[names(res.ind)=="C5"]<-"fHigh"
-    
+
     res<-list(data.frame)
     
-    #Overall results
-    #res[[1]]<-df.all %>% group_by(WB,period) %>%
-    #  summarise(n=n())
-    
-    #QE results
-    #res[[2]]<-res.ind %>% group_by(WB,Period,QualityElement) %>%
-    #  summarise(n=n())
-    
+    Note<-c("OK","data<3yrs","missing","missing")
+    Code<-c(0,-1,-90,-91)
+    Note<-data.frame(Code,Note,stringsAsFactors=FALSE)
+  
     #Indicators
-    res[[1]] <-res.ind #%>% select(WB,Type,Period,QualityElement,QualitySubelement,Indicator,Mean,StdErr,EQR,Class,fBad,fPoor,fMod,fGood,fHigh )
-    res[[2]]<-res.rnd
+    res[[1]] <-res.ind %>% left_join(Note)#%>% select(WB,Type,Period,QualityElement,QualitySubelement,Indicator,Mean,StdErr,EQR,Class,fBad,fPoor,fMod,fGood,fHigh )
+    res[[2]]<-res.rnd %>% left_join(Note)
     if(!exists("res.err")){
       res.err<-data.frame(WB=NA,Type=NA,Period=NA,Indicator=NA,
                           IndSubtype=NA,Code=NA,Error=NA)
@@ -226,7 +284,6 @@ GetClass<-function(df){
   df$class4<-ifelse(df$Resp==1,df$Value<df$MP,df$Value>df$MP)
   df$class5<-ifelse(df$Resp==1,df$Value<df$PB,df$Value>df$PB)
   df$ClassID<-df$class1+df$class2+df$class3+df$class4+df$class5+1
-  df$Class<-Categories[df$ClassID]
   df$Bnd1<-df$Worst
   df$Bnd2<-df$PB
   df$Bnd1<-ifelse(df$ClassID==2,df$PB,df$Bnd1)
@@ -239,7 +296,9 @@ GetClass<-function(df){
   df$Bnd2<-ifelse(df$ClassID==5,df$Ref,df$Bnd2)
   df$EQR<-0.2*((df$ClassID-1)+(df$Value-df$Bnd1)/(df$Bnd2-df$Bnd1))
   df$EQR<-ifelse(df$ClassID>5,1,df$EQR)
+  #Class cannot be better than "High":
   df$ClassID<-ifelse(df$ClassID>5,5,df$ClassID)
+  df$Class<-Categories[df$ClassID]
   df<-select(df,-c(Resp,class1,class2,class3,class4,class5,Bnd1,Bnd2))
   return(df)
 }
@@ -247,8 +306,7 @@ GetClass<-function(df){
 #' SalinityReferenceValues
 #' 
 #' 
-SalinityReferenceValues <- function(df.data,df.bounds,indicator,missing=1){
-  typology <- substr(as.character(distinct(df.data,typology)[1,1]),4,5)
+SalinityReferenceValues <- function(df.bounds,typology,indicator,missing=1){
   refcond<-filter(df.bounds,Type==typology,Indicator==indicator)
   refcond<-refcond[,grep("Sali_", names(refcond), value=TRUE)]
   refcond<-as.numeric(refcond[1,])
@@ -307,9 +365,10 @@ IndicatorResults<-function(df,typology,df.bounds,df.indicators,df.variances,indi
                     TNwinter     = 50
   )
   df.months<- df.bounds %>% distinct(Indicator,Type,Months)
-  RefCond_sali<-SalinityReferenceValues(df,df.bounds,indicator,missing)
+  RefCond_sali<-SalinityReferenceValues(df.bounds,typology,indicator,missing)
   MonthInclude <- IndicatorMonths(df.months,typology,indicator)
   variance_list<- VarianceComponents(df.indicators,df.variances,typology,indicator)
+  cat(paste0(indicator,"\n"))
   res<-CalculateIndicator(indicator,df,RefCond_sali,variance_list,MonthInclude,startyear,endyear,n_iter=nsim)
   
 }

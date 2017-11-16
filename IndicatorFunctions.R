@@ -6,7 +6,7 @@ Aggregate_year_station <- function(df) {
                          summarise(xvar = mean(xvar))
                          
   periodmean <- mean(yearmeans$xvar)
-  res <- list(periodmean=periodmean,yearmeans=yearmeans)
+  res <- list(periodmean=periodmean,yearmeans=yearmeans,error_code=0)
   return(res)
 }
 
@@ -16,7 +16,7 @@ Aggregate_year <- function(df) {
     summarise(xvar = mean(xvar))
   
   periodmean <- mean(yearmeans$xvar)
-  res <- list(periodmean=periodmean,yearmeans=yearmeans)
+  res <- list(periodmean=periodmean,yearmeans=yearmeans,error_code=0)
   return(res)
 }
 
@@ -26,7 +26,7 @@ Aggregate_period <- function(df) {
     summarise(xvar = mean(xvar))
   
   periodmean <- mean(df$xvar)
-  res <- list(periodmean=periodmean,yearmeans=yearmeans)
+  res <- list(periodmean=periodmean,yearmeans=yearmeans,error_code=0)
   return(res)
 }
 
@@ -41,7 +41,7 @@ AggregateEQR_year_station <- function(df) {
     summarise(xvar = mean(xvarEQR))   # should be returned in xvar
   
   periodmean <- mean(yearmeans$xvar)
-  res <- list(periodmean=periodmean,yearmeans=yearmeans)
+  res <- list(periodmean=periodmean,yearmeans=yearmeans,error_code=0)
   return(res)  
 }
 
@@ -54,7 +54,7 @@ AggregateEQR_year <- function(df) {
     summarise(xvar = mean(xvarEQR))   # should be returned in xvar
   
   periodmean <- mean(yearmeans$xvar)
-  res <- list(periodmean=periodmean,yearmeans=yearmeans)
+  res <- list(periodmean=periodmean,yearmeans=yearmeans,error_code=0)
   return(res)  
 }
 
@@ -67,7 +67,7 @@ AggregateEQR_N_period <- function(df) {
     summarise(xvar = mean(xvarEQR))   # should be returned in xvar
   
   periodmean <- mean(df$xvarEQR)
-  res <- list(periodmean=periodmean,yearmeans=yearmeans)
+  res <- list(periodmean=periodmean,yearmeans=yearmeans,error_code=0)
   return(res)  
 }
 
@@ -85,7 +85,7 @@ BQIbootstrap <- function(df) {
 
   periodmean <- mean(BQIsimyear)
   yearmeans <- data.frame(year=Nyearstat$year,xvar = BQIsimyear)
-  res <- list(periodmean=periodmean,yearmeans=yearmeans)
+  res <- list(periodmean=periodmean,yearmeans=yearmeans,error_code=0)
   return(res)  
 }
 
@@ -103,7 +103,7 @@ OxygenTest1 <- function(df) {
   O2_test2_yearmeans <- df2 %>% group_by(year) %>% summarise(xvar = mean(xvar))
   O2_test2_yearmeans <- left_join(years,O2_test2_yearmeans,c("year"))
   yearmeans <- data.frame(year=O2_test1_yearmeans$year,xvar = O2_test1_yearmeans$xvar)
-  res <- list(periodmean=O2_test1,yearmeans=yearmeans)
+  res <- list(periodmean=O2_test1,yearmeans=yearmeans,error_code=0)
   return(res)
 }
 
@@ -123,19 +123,23 @@ OxygenTest2 <- function(df) {
   # Find the percent area affected by O2 concentrations <3.5 ml/l
   O2bottom <- O2bottom %>% mutate(area_hyp = 100-approx(WB_bathymetry$depth,WB_bathymetry$area_pct,O2clinedepth,yleft=0,yright=100)$y)
   # Calculate test1 as average of O2 observations at bottom (<1.5 m from bottom depth) below the 25-percentile for Jan-Dec
-  df1 <- df %>% filter(station_depth-depth<1.5) %>% filter(xvar<=quantile(xvar,na.rm=TRUE)[2])
-  O2_test1 <- mean(df1$xvar)
-  O2_test1_yearmeans <- df1 %>% group_by(year) %>% summarise(xvar = mean(xvar))
+  lower_quantile <- quantile(O2bottom$O2bottom,na.rm=TRUE)[2]
+  df1 <- O2bottom %>% filter(station_depth-max_depth<1.5) %>% filter(O2bottom<=lower_quantile) %>% mutate(year=lubridate::year(date))
+#  df1 <- df %>% filter(station_depth-depth<1.5) %>% filter(xvar<=quantile(xvar,na.rm=TRUE)[2])
+  O2_test1 <- mean(df1$O2bottom)
+  O2_test1_yearmeans <- df1 %>% group_by(year) %>% summarise(O2bottom = mean(O2bottom))
   O2_test1_yearmeans <- left_join(years,O2_test1_yearmeans,c("year"))
   # Calculate EQR from Table 7.1 in Handbook
   EQR_test1 <- approx(c(-5.0,0.0,1.0,2.1,3.5,7.0),c(0,0.2,0.4,0.6,0.8,1),O2_test1,yleft=0,yright=1)$y
-  EQR_test1_yearmeans <- approx(c(-5.0,0.0,1.0,2.1,3.5,7.0),c(0,0.2,0.4,0.6,0.8,1),O2_test1_yearmeans$xvar,yleft=0,yright=1)$y
+  EQR_test1_yearmeans <- approx(c(-10.0,0.0,1.0,2.1,3.5,7.0),c(0,0.2,0.4,0.6,0.8,1),O2_test1_yearmeans$O2bottom,yleft=0,yright=1)$y
   # Calculate test2 as average of O2 concentrations below the 25-percentile for Jan-May
-  df2 <- df1 %>% filter(month %in% c(1,2,3,4,5))
+  df2 <- O2bottom %>% mutate(month = lubridate::month(date),year = lubridate::year(date)) %>% filter(month %in% c(1,2,3,4,5))
   # Return from function if no observations available (Jan-May) for calculation of O2_test2
-  if (nrow(df2) == 0) return(list(result_code=-91))
-  O2_test2 <- mean(df2$xvar)
-  O2_test2_yearmeans <- df2 %>% group_by(year) %>% summarise(xvar = mean(xvar))
+  if (nrow(df2) == 0) {
+    return(list(error_code=-91))
+  }
+  O2_test2 <- mean(df2$O2bottom)
+  O2_test2_yearmeans <- df2 %>% group_by(year) %>% summarise(O2bottom = mean(O2bottom))
   O2_test2_yearmeans <- left_join(years,O2_test2_yearmeans,c("year"))
   # Calculate indicator for percent area affected by <3.5 ml/l
   df2 <- O2bottom %>% mutate(month = lubridate::month(date),year = lubridate::year(date)) %>% filter(month %in% c(6,7,8,9,10,11,12))
@@ -145,9 +149,9 @@ OxygenTest2 <- function(df) {
   EQR_test2 <- approx(BoundariesHypoxicArea,c(0,0.2,0.4,0.6,0.8,1),hyparea,yleft=0,yright=1)$y
   EQR_test2_yearmeans <- approx(BoundariesHypoxicArea,c(0,0.2,0.4,0.6,0.8,1),hyparea_yearmeans$area_hyp,yleft=0,yright=1)$y
   if (O2_test1>3.5 || O2_test2>3.5) {
-    res <- list(periodmean=EQR_test1,yearmeans=data.frame(year=O2_test1_yearmeans$year,xvar = EQR_test1_yearmeans))
+    res <- list(periodmean=EQR_test1,yearmeans=data.frame(year=O2_test1_yearmeans$year,xvar = EQR_test1_yearmeans),error_code=0)
   } else {
-    res <- list(periodmean=EQR_test2,yearmeans=data.frame(year=O2_test1_yearmeans$year,xvar = EQR_test2_yearmeans))
+    res <- list(periodmean=EQR_test2,yearmeans=data.frame(year=O2_test1_yearmeans$year,xvar = EQR_test2_yearmeans),error_code=0)
   }
   return(res)
 }
@@ -289,6 +293,7 @@ CalculateIndicator <-
 # Simulate system with random variables for estimating the variance of the indicator
     simres <- vector("numeric",n_iter)
     simresyear <- matrix(nrow=ndf$n_year,ncol=n_iter)
+    simrescode <- vector("numeric",n_iter)
 # simulation loop - simres contains the residuals from n_iter simulations
     for (isim in 1:n_iter) {
       # simulate variations in the random factors using the data structure
@@ -303,8 +308,15 @@ CalculateIndicator <-
       simul_df <- df %>% mutate(xvar = NULL, xvar=simulobs)
       # Calculate indicator value for each year and period
       simul_indicator <- f_fun(simul_df)
-      simresyear[,isim]=simul_indicator$yearmeans$xvar
-      simres[isim] <- simul_indicator$periodmean
+      # Check for errors in simulations
+      simrescode[isim] <- simul_indicator$error_code
+      if (simul_indicator$error_code == 0) {
+         simresyear[,isim]=simul_indicator$yearmeans$xvar
+         simres[isim] <- simul_indicator$periodmean
+      } else{
+        simresyear[,isim]= c(rep(NA,6))
+        simresyear[isim]= NA
+      }
     } # end simulation loop
     
 # Adjust simulations to have zero mean and then add indicator means - bias correction

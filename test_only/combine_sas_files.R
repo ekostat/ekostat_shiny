@@ -71,7 +71,7 @@ for (i in 1:length(wb)){
   }
 }
 
-write.table(df,file="data/data.txt",row.names=F,na="",sep=";")
+#write.table(df,file="data/data.txt",row.names=F,na="",sep=";")
 #write.table(df,file="data/data_bqi.txt",row.names=F,na="",sep=";")
 
 

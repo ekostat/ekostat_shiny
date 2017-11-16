@@ -5,72 +5,94 @@ library(shiny)
 shinyUI(
   navbarPage(id = "inTabset",
              windowTitle="WATERS Status Assessment Tool",
-    title=div(img(src="waters_2.gif")), 
-    tabPanel("Data",
-             navlistPanel(
-               widths=c(2,10),well=F,
-               tabPanel(
-                 "New",
-                 p(strong("New Assessment")),
-                 #p("Select waterbodies and download data from database(s)."),
-                 p("Select waterbodies"),
-                 uiOutput("selectWaterDistrict"),
-                 uiOutput("selectPeriod"),
-                 uiOutput("selectWaterBodies"),
-                 uiOutput("dataButton"),
-                 uiOutput("nrows")
-                 #actionButton("goButton", "Get data")
-                 #conditionalPanel(condition = "input.waterbody != ''",)
-               ),
-               tabPanel("Open",
-                        fileInput('file1', 'Load existing assessment',
-                                  accept=c('text/csv', 
-                                           'text/comma-separated-values,text/plain', 
-                                           '.csv'))  
-               ),
-               tabPanel("Save",
-                        p(strong("Save the current assessment")),
-                        downloadButton('downloadData', label="Save") 
-               )
-             )
+             title=div(img(src="waters_2.gif")), 
+             tabPanel("Data",
+                      navlistPanel(
+                        widths=c(2,10),well=F,
+                        tabPanel(
+                          "New",
+                          
+                          h3("New Assessment"),
+                          uiOutput("selectWaterDistrict"),
+                          uiOutput("selectWaterBodies"),
+                          uiOutput("selectPeriod"),
+                          uiOutput("dataButton")
+                          
+                          
+                        ),
+                        tabPanel("Open",
+                                 fileInput('file1', h3('Load existing assessment'),
+                                           accept=c('text/csv', 
+                                                    'text/comma-separated-values,text/plain', 
+                                                    '.csv'))  
+                        )
+                        #,
+                        #tabPanel("Save",
+                        #          p(strong("Save the current assessment")),
+                        #          downloadButton('downloadData', label="Save") 
+                        #)
+                      )
+                      
+             ),
+             tabPanel(
+               "Assessment",
+               navlistPanel(
+                 widths=c(2,10),well=F,
+                 tabPanel("Indicators",
+                          #p("Indicators"),
+                          #p("Data loaded:"),
+                          uiOutput("nrows"),
+                          uiOutput("chkIndicators"),
+                          uiOutput("goButton")
+                 ),
+                 tabPanel("Monte Carlo",
+                          p("Options for Monte Carlo simulations."),
+                          numericInput("n",
+                                       label = "Number of simulations", min=1,
+                                       value = 20)
+                 )
+               )),
              
-    ),
-    tabPanel(
-      "Options",
-      navlistPanel(
-        widths=c(2,10),well=F,
-        tabPanel("Monte Carlo",
-                 "Options for Monte Carlo simulations.",
-                 numericInput("n",
-                              label = "Number of simulations", 
-                              value = 100)   
-        ),
-        tabPanel("Uncertainty",
-                 "Uncertainty Library"),
-        tabPanel("Aggregation",
-                 "Aggregation methods")
-      )
-    ),
-    
-    tabPanel(
-      "Results",
-      navlistPanel(
-        widths=c(2,10),well=F,
-        tabPanel("Overall",
-                 "Overall Results",
-                 uiOutput("resTableOverall")),
-        tabPanel("Quality Element",
-                 "QE Results",
-                 uiOutput("resTableQE")),
-        tabPanel("Indicator",
-                 "Indicator Data",
-                 uiOutput("resTableInd"))
-      ),
-      
-      fluidRow(column(width=12,
-                      downloadButton('downloadReport', label="Download report")
-      ))
-    )
+             tabPanel(
+               "Results",
+               navlistPanel(
+                 widths=c(2,10),well=F,
+                 tabPanel("Class",
+                          fluidRow(column(width=12,h3("Overall Results:"),DT::dataTableOutput("resTable1"))
+                          ),
+                          fluidRow(column(width=4,h3("Biological/Supporting:"),DT::dataTableOutput("resTable2")),
+                                   column(width=4,h3("Quality Element:"),DT::dataTableOutput("resTable3")),
+                                   column(width=4,h3("Subelement:"),DT::dataTableOutput("resTable4"))
+                          ),
+                          fluidRow(column(width=12,h3("Indicators:"),
+                                          DT::dataTableOutput("resTableInd"))
+                          )
+                    
+                          
+                 ),
+                 tabPanel("Indicators",
+                          h3("Indicator List"),
+                          checkboxInput("chkClassBnds","Show Class Boundaries", value=FALSE, width=NULL),
+                          DT::dataTableOutput("resTableMC")
+                          ),
+                 tabPanel("Errors",
+                          fluidRow(column(width=3,
+                          h3("Indicator Errors"),
+                          checkboxInput("IgnoreErr", "Ignore indicator minimum year count", value = FALSE, width = NULL),
+                          p("Check this option to include indicators which otherwise would be ignored because they don't meet the requirements for number of years with data.")
+                          ),
+                          column(width=3,
+                           DT::dataTableOutput("resTableErr")
+                                          )
+                          ),
+                          fluidRow(column(width=10,""))
+                 )
+               ),
+               
+               fluidRow(column(width=12,
+                               downloadButton('downloadReport', label="Download report")
+               ))
+             )
   ))
 
 
