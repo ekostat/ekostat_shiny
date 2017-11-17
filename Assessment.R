@@ -22,6 +22,7 @@ Assessment <-
     
     wblist<-distinct(df.all,WB,typology)
     wbcount<-nrow(wblist)
+    progfrac= 1/(wbcount*3*length(IndicatorList))
     
     # Loop through distinct waterbodies and periods in the data
     for(iWB in 1:wbcount){
@@ -158,8 +159,10 @@ Assessment <-
               }
               
             }
-          }
-        } #for(iSub in 1:subcount)
+          } #for(iSub in 1:subcount)
+          
+          incProgress(progfrac,detail=paste(wblist$WB[iWB],plist$period[iPeriod]))
+        } #for(iInd in IndicatorList)
       }  #for(iPeriod in 1:pcount) 
     }    #for(iWB in 1:wbcount)
     #---------------------- Summarise results --------------------------

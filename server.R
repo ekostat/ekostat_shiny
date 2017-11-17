@@ -131,7 +131,6 @@ shinyServer(function(input, output, session) {
   })
   
   observeEvent(input$IgnoreErr, {
-    str(paste0("Check Errors ",input$IgnoreErr," ",typeof(input$IgnoreErr)))
     if(nrow(values$resMC)>0){
       df<-values$resMC %>% rename(EQRMC=EQR,ClassMC=Class,Class=ClassAvg,EQR=EQRavg)
       #browser()
@@ -310,8 +309,15 @@ shinyServer(function(input, output, session) {
       df.select <- filter(df, WB %in% input$waterbody, period %in% input$period)
       n<-nrow(df.select)
       
+      #Progress wrap Start
+      style <- isolate(input$style)
+      withProgress(message = 'Calculating', style = style, value = 0.0, {
+        
       #Call the assessment calculations
       AssessmentResults<-Assessment(df.select,nsim=nSimMC,IndList)
+      
+      })
+      
       resAvg<-AssessmentResults[[1]]
       resMC<-AssessmentResults[[2]]
       resErr<-AssessmentResults[[3]]
