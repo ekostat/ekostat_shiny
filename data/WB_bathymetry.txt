@@ -1,0 +1,201 @@
+"WB_name"	"WaterbodyID"	"area_pct"	"depth"
+"Byfjorden"	"SE582000-115270"	1	0.25
+"Byfjorden"	"SE582000-115270"	2	0.5
+"Byfjorden"	"SE582000-115270"	3	0.75
+"Byfjorden"	"SE582000-115270"	4	1
+"Byfjorden"	"SE582000-115270"	5	1.25
+"Byfjorden"	"SE582000-115270"	6	1.5
+"Byfjorden"	"SE582000-115270"	7	1.75
+"Byfjorden"	"SE582000-115270"	8	2
+"Byfjorden"	"SE582000-115270"	9	2.25
+"Byfjorden"	"SE582000-115270"	10	2.5
+"Byfjorden"	"SE582000-115270"	11	2.75
+"Byfjorden"	"SE582000-115270"	12	3
+"Byfjorden"	"SE582000-115270"	13	3.25
+"Byfjorden"	"SE582000-115270"	14	3.5
+"Byfjorden"	"SE582000-115270"	15	3.75
+"Byfjorden"	"SE582000-115270"	16	4
+"Byfjorden"	"SE582000-115270"	17	4.25
+"Byfjorden"	"SE582000-115270"	18	4.5
+"Byfjorden"	"SE582000-115270"	19	4.75
+"Byfjorden"	"SE582000-115270"	20	5
+"Byfjorden"	"SE582000-115270"	21	5.25
+"Byfjorden"	"SE582000-115270"	22	5.5
+"Byfjorden"	"SE582000-115270"	23	5.75
+"Byfjorden"	"SE582000-115270"	24	6
+"Byfjorden"	"SE582000-115270"	25	6.25
+"Byfjorden"	"SE582000-115270"	26	6.5
+"Byfjorden"	"SE582000-115270"	27	6.75
+"Byfjorden"	"SE582000-115270"	28	7
+"Byfjorden"	"SE582000-115270"	29	7.25
+"Byfjorden"	"SE582000-115270"	30	7.5
+"Byfjorden"	"SE582000-115270"	31	7.75
+"Byfjorden"	"SE582000-115270"	32	8
+"Byfjorden"	"SE582000-115270"	33	8.25
+"Byfjorden"	"SE582000-115270"	34	8.5
+"Byfjorden"	"SE582000-115270"	35	8.75
+"Byfjorden"	"SE582000-115270"	36	9
+"Byfjorden"	"SE582000-115270"	37	9.25
+"Byfjorden"	"SE582000-115270"	38	9.5
+"Byfjorden"	"SE582000-115270"	39	9.75
+"Byfjorden"	"SE582000-115270"	40	10
+"Byfjorden"	"SE582000-115270"	41	10.5
+"Byfjorden"	"SE582000-115270"	42	11
+"Byfjorden"	"SE582000-115270"	43	11.5
+"Byfjorden"	"SE582000-115270"	44	12
+"Byfjorden"	"SE582000-115270"	45	12.5
+"Byfjorden"	"SE582000-115270"	46	13
+"Byfjorden"	"SE582000-115270"	47	13.5
+"Byfjorden"	"SE582000-115270"	48	14
+"Byfjorden"	"SE582000-115270"	49	14.5
+"Byfjorden"	"SE582000-115270"	50	15
+"Byfjorden"	"SE582000-115270"	51	15.5
+"Byfjorden"	"SE582000-115270"	52	16
+"Byfjorden"	"SE582000-115270"	53	16.5
+"Byfjorden"	"SE582000-115270"	54	17
+"Byfjorden"	"SE582000-115270"	55	17.5
+"Byfjorden"	"SE582000-115270"	56	18
+"Byfjorden"	"SE582000-115270"	57	18.5
+"Byfjorden"	"SE582000-115270"	58	19
+"Byfjorden"	"SE582000-115270"	59	19.5
+"Byfjorden"	"SE582000-115270"	60	20
+"Byfjorden"	"SE582000-115270"	61	20.3333333333333
+"Byfjorden"	"SE582000-115270"	62	20.6666666666667
+"Byfjorden"	"SE582000-115270"	63	21
+"Byfjorden"	"SE582000-115270"	64	21.3333333333333
+"Byfjorden"	"SE582000-115270"	65	21.6666666666667
+"Byfjorden"	"SE582000-115270"	66	22
+"Byfjorden"	"SE582000-115270"	67	22.3333333333333
+"Byfjorden"	"SE582000-115270"	68	22.6666666666667
+"Byfjorden"	"SE582000-115270"	69	23
+"Byfjorden"	"SE582000-115270"	70	23.3333333333333
+"Byfjorden"	"SE582000-115270"	71	23.6666666666667
+"Byfjorden"	"SE582000-115270"	72	24
+"Byfjorden"	"SE582000-115270"	73	24.3333333333333
+"Byfjorden"	"SE582000-115270"	74	24.6666666666667
+"Byfjorden"	"SE582000-115270"	75	25
+"Byfjorden"	"SE582000-115270"	76	25.3333333333333
+"Byfjorden"	"SE582000-115270"	77	25.6666666666667
+"Byfjorden"	"SE582000-115270"	78	26
+"Byfjorden"	"SE582000-115270"	79	26.3333333333333
+"Byfjorden"	"SE582000-115270"	80	26.6666666666667
+"Byfjorden"	"SE582000-115270"	81	27
+"Byfjorden"	"SE582000-115270"	82	27.3333333333333
+"Byfjorden"	"SE582000-115270"	83	27.6666666666667
+"Byfjorden"	"SE582000-115270"	84	28
+"Byfjorden"	"SE582000-115270"	85	28.3333333333333
+"Byfjorden"	"SE582000-115270"	86	28.6666666666667
+"Byfjorden"	"SE582000-115270"	87	29
+"Byfjorden"	"SE582000-115270"	88	29.3333333333333
+"Byfjorden"	"SE582000-115270"	89	29.6666666666667
+"Byfjorden"	"SE582000-115270"	90	30
+"Byfjorden"	"SE582000-115270"	91	31
+"Byfjorden"	"SE582000-115270"	92	32
+"Byfjorden"	"SE582000-115270"	93	33
+"Byfjorden"	"SE582000-115270"	94	34
+"Byfjorden"	"SE582000-115270"	95	35
+"Byfjorden"	"SE582000-115270"	96	36
+"Byfjorden"	"SE582000-115270"	97	37
+"Byfjorden"	"SE582000-115270"	98	38
+"Byfjorden"	"SE582000-115270"	99	39
+"Byfjorden"	"SE582000-115270"	100	40
+"Gullmarn centralbassäng"	"SE581700-113000"	1	2
+"Gullmarn centralbassäng"	"SE581700-113000"	2	4
+"Gullmarn centralbassäng"	"SE581700-113000"	3	6
+"Gullmarn centralbassäng"	"SE581700-113000"	4	8
+"Gullmarn centralbassäng"	"SE581700-113000"	5	10
+"Gullmarn centralbassäng"	"SE581700-113000"	6	12
+"Gullmarn centralbassäng"	"SE581700-113000"	7	14
+"Gullmarn centralbassäng"	"SE581700-113000"	8	16
+"Gullmarn centralbassäng"	"SE581700-113000"	9	18
+"Gullmarn centralbassäng"	"SE581700-113000"	10	20
+"Gullmarn centralbassäng"	"SE581700-113000"	11	22
+"Gullmarn centralbassäng"	"SE581700-113000"	12	24
+"Gullmarn centralbassäng"	"SE581700-113000"	13	26
+"Gullmarn centralbassäng"	"SE581700-113000"	14	28
+"Gullmarn centralbassäng"	"SE581700-113000"	15	30
+"Gullmarn centralbassäng"	"SE581700-113000"	16	32
+"Gullmarn centralbassäng"	"SE581700-113000"	17	34
+"Gullmarn centralbassäng"	"SE581700-113000"	18	36
+"Gullmarn centralbassäng"	"SE581700-113000"	19	38
+"Gullmarn centralbassäng"	"SE581700-113000"	20	40
+"Gullmarn centralbassäng"	"SE581700-113000"	21	42
+"Gullmarn centralbassäng"	"SE581700-113000"	22	44
+"Gullmarn centralbassäng"	"SE581700-113000"	23	46
+"Gullmarn centralbassäng"	"SE581700-113000"	24	48
+"Gullmarn centralbassäng"	"SE581700-113000"	25	50
+"Gullmarn centralbassäng"	"SE581700-113000"	26	52
+"Gullmarn centralbassäng"	"SE581700-113000"	27	54
+"Gullmarn centralbassäng"	"SE581700-113000"	28	56
+"Gullmarn centralbassäng"	"SE581700-113000"	29	58
+"Gullmarn centralbassäng"	"SE581700-113000"	30	60
+"Gullmarn centralbassäng"	"SE581700-113000"	31	62
+"Gullmarn centralbassäng"	"SE581700-113000"	32	64
+"Gullmarn centralbassäng"	"SE581700-113000"	33	66
+"Gullmarn centralbassäng"	"SE581700-113000"	34	68
+"Gullmarn centralbassäng"	"SE581700-113000"	35	70
+"Gullmarn centralbassäng"	"SE581700-113000"	36	72
+"Gullmarn centralbassäng"	"SE581700-113000"	37	74
+"Gullmarn centralbassäng"	"SE581700-113000"	38	76
+"Gullmarn centralbassäng"	"SE581700-113000"	39	78
+"Gullmarn centralbassäng"	"SE581700-113000"	40	80
+"Gullmarn centralbassäng"	"SE581700-113000"	41	81
+"Gullmarn centralbassäng"	"SE581700-113000"	42	82
+"Gullmarn centralbassäng"	"SE581700-113000"	43	83
+"Gullmarn centralbassäng"	"SE581700-113000"	44	84
+"Gullmarn centralbassäng"	"SE581700-113000"	45	85
+"Gullmarn centralbassäng"	"SE581700-113000"	46	86
+"Gullmarn centralbassäng"	"SE581700-113000"	47	87
+"Gullmarn centralbassäng"	"SE581700-113000"	48	88
+"Gullmarn centralbassäng"	"SE581700-113000"	49	89
+"Gullmarn centralbassäng"	"SE581700-113000"	50	90
+"Gullmarn centralbassäng"	"SE581700-113000"	51	91
+"Gullmarn centralbassäng"	"SE581700-113000"	52	92
+"Gullmarn centralbassäng"	"SE581700-113000"	53	93
+"Gullmarn centralbassäng"	"SE581700-113000"	54	94
+"Gullmarn centralbassäng"	"SE581700-113000"	55	95
+"Gullmarn centralbassäng"	"SE581700-113000"	56	96
+"Gullmarn centralbassäng"	"SE581700-113000"	57	97
+"Gullmarn centralbassäng"	"SE581700-113000"	58	98
+"Gullmarn centralbassäng"	"SE581700-113000"	59	99
+"Gullmarn centralbassäng"	"SE581700-113000"	60	100
+"Gullmarn centralbassäng"	"SE581700-113000"	61	101
+"Gullmarn centralbassäng"	"SE581700-113000"	62	102
+"Gullmarn centralbassäng"	"SE581700-113000"	63	103
+"Gullmarn centralbassäng"	"SE581700-113000"	64	104
+"Gullmarn centralbassäng"	"SE581700-113000"	65	105
+"Gullmarn centralbassäng"	"SE581700-113000"	66	106
+"Gullmarn centralbassäng"	"SE581700-113000"	67	107
+"Gullmarn centralbassäng"	"SE581700-113000"	68	108
+"Gullmarn centralbassäng"	"SE581700-113000"	69	109
+"Gullmarn centralbassäng"	"SE581700-113000"	70	110
+"Gullmarn centralbassäng"	"SE581700-113000"	71	111
+"Gullmarn centralbassäng"	"SE581700-113000"	72	112
+"Gullmarn centralbassäng"	"SE581700-113000"	73	113
+"Gullmarn centralbassäng"	"SE581700-113000"	74	114
+"Gullmarn centralbassäng"	"SE581700-113000"	75	115
+"Gullmarn centralbassäng"	"SE581700-113000"	76	116
+"Gullmarn centralbassäng"	"SE581700-113000"	77	117
+"Gullmarn centralbassäng"	"SE581700-113000"	78	118
+"Gullmarn centralbassäng"	"SE581700-113000"	79	119
+"Gullmarn centralbassäng"	"SE581700-113000"	80	120
+"Gullmarn centralbassäng"	"SE581700-113000"	81	121
+"Gullmarn centralbassäng"	"SE581700-113000"	82	122
+"Gullmarn centralbassäng"	"SE581700-113000"	83	123
+"Gullmarn centralbassäng"	"SE581700-113000"	84	124
+"Gullmarn centralbassäng"	"SE581700-113000"	85	125
+"Gullmarn centralbassäng"	"SE581700-113000"	86	126
+"Gullmarn centralbassäng"	"SE581700-113000"	87	127
+"Gullmarn centralbassäng"	"SE581700-113000"	88	128
+"Gullmarn centralbassäng"	"SE581700-113000"	89	129
+"Gullmarn centralbassäng"	"SE581700-113000"	90	130
+"Gullmarn centralbassäng"	"SE581700-113000"	91	131
+"Gullmarn centralbassäng"	"SE581700-113000"	92	132
+"Gullmarn centralbassäng"	"SE581700-113000"	93	133
+"Gullmarn centralbassäng"	"SE581700-113000"	94	134
+"Gullmarn centralbassäng"	"SE581700-113000"	95	135
+"Gullmarn centralbassäng"	"SE581700-113000"	96	136
+"Gullmarn centralbassäng"	"SE581700-113000"	97	137
+"Gullmarn centralbassäng"	"SE581700-113000"	98	138
+"Gullmarn centralbassäng"	"SE581700-113000"	99	139
+"Gullmarn centralbassäng"	"SE581700-113000"	100	140

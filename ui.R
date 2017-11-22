@@ -58,16 +58,22 @@ shinyUI(
                navlistPanel(
                  widths=c(2,10),well=F,
                  tabPanel("Class",
-                          fluidRow(column(width=12,h3("Overall Results:"),DT::dataTableOutput("resTable1"))
+                          fluidRow(column(width=12,htmlOutput("titleTable1"),DT::dataTableOutput("resTable1")) 
                           ),
-                          fluidRow(column(width=4,h3("Biological/Supporting:"),DT::dataTableOutput("resTable2")),
-                                   column(width=4,h3("Quality Element:"),DT::dataTableOutput("resTable3")),
-                                   column(width=4,h3("Subelement:"),DT::dataTableOutput("resTable4"))
+                          fluidRow(column(width=4,htmlOutput("titleTable2"),DT::dataTableOutput("resTable2")),
+                                   column(width=4,htmlOutput("titleTable3"),DT::dataTableOutput("resTable3")),
+                                   column(width=4,htmlOutput("titleTable4"),DT::dataTableOutput("resTable4"))
                           ),
-                          fluidRow(column(width=12,h3("Indicators:"),
+                          fluidRow(column(width=12,htmlOutput("titleTableInd"),
                                           DT::dataTableOutput("resTableInd"))
+                                   ),
+                          fluidRow(column(width=12,htmlOutput("titleTableObs"))        
+                          ),
+                          fluidRow(column(width=6,DT::dataTableOutput("resTableObs")),
+                                   
+                                   column(width=6,plotOutput("plotObs"))        
                           )
-                    
+                          
                           
                  ),
                  tabPanel("Indicators",
@@ -84,13 +90,14 @@ shinyUI(
                           column(width=3,
                            DT::dataTableOutput("resTableErr")
                                           )
-                          ),
-                          fluidRow(column(width=10,""))
+                          )
+                          
                  )
                ),
                
                fluidRow(column(width=12,
                                downloadButton('downloadReport', label="Download report")
+                               #downloadButton('downloadData', label="Save Assessment")
                ))
              )
   ))
