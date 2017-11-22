@@ -12,8 +12,13 @@ Assessment <-
   function(df.all,nsim=1000,IndicatorList) {
     
     df.bounds<-ReadBounds()
+    df.bounds.hypox<-ReadBoundsHypoxicArea()
+    df.bathy<-ReadBathymetry()
     df.indicators<-ReadIndicatorType()
     df.variances<-ReadVariances()
+
+    
+    
     
     df.all$typology<-gsub("SE_", "", df.all$typology)
     # V_stationdate
@@ -52,6 +57,16 @@ Assessment <-
             if(subtype!=""){
               df<-FilterDepth(dfsubs,subtype)
             }
+            
+            # The oxygen indicator refers to two global dataframes: WB_bathymetry and BoundariesHypoxicArea
+            # We need to set these before calling the O2 indicator
+            # Indicator functions need to be modified so that thus information is sent as parameters in the function call!
+            
+            if(iInd=="Oxygen"){
+              BoundariesHypoxicArea <<- df.bounds.hypox %>% filter(WB==wblist$WB[iWB]) %>% select(RefCond,H.G,G.M,M.P,P.B,Worst) %>% as.list()
+              WB_bathymetry <<- df.bathy %>% filter(WB==wblist$WB[iWB]) %>% select(area_pct,depth)
+            }
+            
             
             res<-IndicatorResults(df,typology,df.bounds,df.indicators,df.variances,iInd,startyear,endyear,nsim)
             if(res$result_code %in% c(0,-1)){
@@ -372,8 +387,9 @@ IndicatorResults<-function(df,typology,df.bounds,df.indicators,df.variances,indi
   MonthInclude <- IndicatorMonths(df.months,typology,indicator)
   variance_list<- VarianceComponents(df.indicators,df.variances,typology,indicator)
   cat(paste0(indicator,"\n"))
-  res<-CalculateIndicator(indicator,df,RefCond_sali,variance_list,MonthInclude,startyear,endyear,n_iter=nsim)
   
+  res<-CalculateIndicator(indicator,df,RefCond_sali,variance_list,MonthInclude,startyear,endyear,n_iter=nsim)
+
 }
 
 #' FilterDepth
