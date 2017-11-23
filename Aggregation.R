@@ -64,7 +64,7 @@ Aggregate<-function(df,level=1,Groups="",QE_use_mean=c("Supporting")){
         mutate(id = row_number()) %>% filter(id==1) %>%
         select(-id)
       
-      df_min$EQR<-ifelse(QEtype %in% QE_use_mean,df_min$EQRmean,df_min$EQR) 
+      df_min$EQR<-ifelse(df_min$QEtype %in% QE_use_mean,df_min$EQRmean,df_min$EQR) 
       df_min <- df_min %>% select(-EQRmean)
 
       df_res <- EQRclass(df_min)
