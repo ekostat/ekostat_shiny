@@ -68,6 +68,7 @@ shinyServer(function(input, output, session) {
       "temp",
       "sali",
       "chla" ,
+      "biovol",
       "TP",
       "TN",
       "dens_dif",
@@ -914,68 +915,68 @@ shinyServer(function(input, output, session) {
       nchl <- dfind %>% filter(!is.na(chla)) %>% summarise(n = n())
       if (nchl[1, 1] > 0) {
         sList = c(sList,
-                  "Chlorophyll a" = "Chla",
-                  "Chlorophyll a (EQR)" = "ChlaEQR")
-        Choices <- c(Choices, "Chla")
+                  "Chlorophyll a" = "CoastChla",
+                  "Chlorophyll a (EQR)" = "CoastChlaEQR")
+        Choices <- c(Choices, "CoastChla")
       }
       ntn <- dfind %>% filter(!is.na(TN)) %>% summarise(n = n())
       if (ntn[1, 1] > 0) {
         sList = c(
           sList,
-          "Summer TN" = "TNsummer",
-          "Summer TN (EQR)" = "TNsummerEQR",
-          "Winter TN" = "TNwinter",
-          "Winter TN (EQR)" = "TNwinterEQR"
+          "Summer TN" = "CoastTNsummer",
+          "Summer TN (EQR)" = "CoastTNsummerEQR",
+          "Winter TN" = "CoastTNwinter",
+          "Winter TN (EQR)" = "CoastTNwinterEQR"
         )
-        Choices <- c(Choices, "TNsummer", "TNwinter")
+        Choices <- c(Choices, "CoastTNsummer", "CoastTNwinter")
       }
       ntp <- dfind %>% filter(!is.na(TP)) %>% summarise(n = n())
       if (ntp[1, 1] > 0) {
         sList = c(
           sList,
-          "Summer TP" = "TPsummer",
-          "Summer TP (EQR)" = "TPsummerEQR",
-          "Winter TP" = "TPwinter",
-          "Winter TP (EQR)" = "TPwinterEQR"
+          "Summer TP" = "CoastTPsummer",
+          "Summer TP (EQR)" = "CoastTPsummerEQR",
+          "Winter TP" = "CoastTPwinter",
+          "Winter TP (EQR)" = "CoastTPwinterEQR"
         )
-        Choices <- c(Choices, "TPsummer", "TPwinter")
+        Choices <- c(Choices, "CoastTPsummer", "CoastTPwinter")
       }
       ndin <- dfind %>% filter(!is.na(DIN)) %>% summarise(n = n())
       if (ndin[1, 1] > 0) {
         sList = c(sList,
-                  "Summer DIN" = "DINsummer",
-                  "Summer DIN (EQR)" = "DINsummerEQR")
-        Choices <- c(Choices, "DINsummer")
+                  "Summer DIN" = "CoastDINsummer",
+                  "Summer DIN (EQR)" = "CoastDINsummerEQR")
+        Choices <- c(Choices, "CoastDINsummer")
       }
       ndip <- dfind %>% filter(!is.na(DIP)) %>% summarise(n = n())
       if (ndip[1, 1] > 0) {
         sList = c(sList,
-                  "Summer DIP" = "DIPsummer",
-                  "Summer DIP (EQR)" = "DIPsummerEQR")
-        Choices <- c(Choices, "DIPsummer")
+                  "Summer DIP" = "CoastDIPsummer",
+                  "Summer DIP (EQR)" = "CoastDIPsummerEQR")
+        Choices <- c(Choices, "CoastDIPsummer")
       }
       nsec <- dfind %>% filter(!is.na(secchi)) %>% summarise(n = n())
       if (nsec[1, 1] > 0) {
         sList = c(sList,
-                  "Secchi Depth" = "Secchi",
-                  "Secchi Depth (EQR)" = "SecchiEQR")
-        Choices <- c(Choices, "Secchi")
+                  "Secchi Depth" = "CoastSecchi",
+                  "Secchi Depth (EQR)" = "CoastSecchiEQR")
+        Choices <- c(Choices, "CoastSecchi")
       }
       nbqi <- dfind %>% filter(!is.na(BQI)) %>% summarise(n = n())
       if (nbqi[1, 1] > 0) {
-        sList = c(sList, "Benthic Quality Index (BQI)" = "BQI")
-        Choices <- c(Choices, "BQI")
+        sList = c(sList, "Benthic Quality Index (BQI)" = "CoastBQI")
+        Choices <- c(Choices, "CoastBQI")
       }
       nmsmdi <- dfind %>% filter(!is.na(MSMDI)) %>% summarise(n = n())
       if (nmsmdi[1, 1] > 0) {
-        sList = c(sList, "Multi Species Maximum Depth Index (MSMDI)" = "MSMDI")
-        Choices <- c(Choices, "MSMDI")
+        sList = c(sList, "Multi Species Maximum Depth Index (MSMDI)" = "CoastMSMDI")
+        Choices <- c(Choices, "CoastMSMDI")
       }
       
       no2 <- dfind %>% filter(!is.na(O2)) %>% summarise(n = n())
       if (no2[1, 1] > 0) {
-        sList = c(sList, "Dissolved Oxygen (O2)" = "Oxygen")
-        Choices <- c(Choices, "Oxygen")
+        sList = c(sList, "Dissolved Oxygen (O2)" = "CoastOxygen")
+        Choices <- c(Choices, "CoastOxygen")
       }
       
       

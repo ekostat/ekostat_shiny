@@ -16,11 +16,15 @@
 #'  
 #' 
 
-Aggregate<-function(df,level=1,Groups=""){
+Aggregate<-function(df,level=1,Groups="",QE_use_mean=c("Supporting")){
   # level=1 overall result
   # level=2 QE type (biological / supporting)
   # level=3 QE result
   # level=4 subelement result
+  
+  # QE_use_mean - list of QE "groups" e.g. "Supporting"
+  #               within this group, the status is calculated from the mean of EQR for Quality Elements
+  #               for other groups (e.g. "Biological"), status is calculated from the lowest EQR of Qulaity Elements (OOAO)
   
   GroupsType<-c(Groups,"QEtype")
   GroupsQE<-c(Groups,"QualityElement","QEtype")
@@ -41,12 +45,14 @@ Aggregate<-function(df,level=1,Groups=""){
     if(level==3){
       df_res <- EQRclass(df_res)
     }else{
+      #browser()
       df_res$EQR<-ifelse(is.nan(df_res$EQR),NA,df_res$EQR)
       df_min <- df_res %>%
         group_by_(.dots=GroupsType) %>%
-        summarise(nInd=sum(nInd,na.rm=TRUE),nSubE=sum(nSubE,na.rm=TRUE),EQR=min(EQR,na.rm=TRUE)) %>%
+        summarise(nInd=sum(nInd,na.rm=TRUE),nSubE=sum(nSubE,na.rm=TRUE),EQRmean=mean(EQR,na.rm=TRUE),EQR=min(EQR,na.rm=TRUE)) %>%
         ungroup()
       df_min$EQR<-ifelse(is.infinite(df_min$EQR),NA,df_min$EQR)
+      
       #Join the dataframe with minimum EQR values back to the QE results to get the name of
       # the QE having the lowest EQR.
       # if there are two QE sharing the same minimum value, then we will get two QEs per Group
@@ -58,6 +64,9 @@ Aggregate<-function(df,level=1,Groups=""){
         mutate(id = row_number()) %>% filter(id==1) %>%
         select(-id)
       
+      df_min$EQR<-ifelse(QEtype %in% QE_use_mean,df_min$EQRmean,df_min$EQR) 
+      df_min <- df_min %>% select(-EQRmean)
+
       df_res <- EQRclass(df_min)
       if(level==1){
         QEtype<-c("Biological","Supporting")
@@ -80,12 +89,14 @@ Aggregate<-function(df,level=1,Groups=""){
           mutate(ClassID=ifelse(Biological<Supporting2,Biological,Supporting2)) %>%
           select(-c(Supporting2)) %>%
           rename(ClassIDBio=Biological,ClassIDSup=Supporting)
+        
         df_res2 <- df_gp %>%
           left_join(df_res) %>% 
           mutate(nInd=ifelse(is.na(nInd),0,nInd)) %>%
           select(-c(ClassID,nSubE,Worst,Class,EQR)) %>% 
           spread(key=QEtype,value=nInd) %>%
           rename(nIndBio=Biological,nIndSup=Supporting)
+        
         df_res <- left_join(df_res1,df_res2)
         
         Categories<-c("Bad","Poor","Mod","Good","High","Ref")
