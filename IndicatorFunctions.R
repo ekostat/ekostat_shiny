@@ -305,7 +305,7 @@ CalculateIndicator <-
 # simulation loop - simres contains the residuals from n_iter simulations
     for (isim in 1:n_iter) {
       # simulate variations in the random factors using the data structure
-      if (Indicator == "Oxygen") {
+      if (grepl("Oxygen",Indicator,fixed=TRUE)) {
          simulobs <- SetVector_IndicatorSimO2(alpha$mean,ndf,var_list,df,length(MonthInclude))
       } else {
          simulobs <- SetVector_IndicatorSim(alpha$mean,ndf,var_list,df,length(MonthInclude))
