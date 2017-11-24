@@ -14,7 +14,7 @@ theme_set(theme_bw(base_size = 12, base_family = "Open Sans"))
 # Clean the workspace
 rm(list = ls())
 
-source("ReadMonitoringData.R")
+source("test_only/ReadMonitoringData.R")
 source("ReadIndicatorParms.R")
 #source("CalculateIndicator.R")
 source("CalculateIndicatorSupport.R")

@@ -3,7 +3,7 @@
 
 library(shiny)
 library(DT)
-library(tidyverse)
+library(tidyr)
 library(haven)
 library(lme4)
 library(lubridate)
@@ -504,7 +504,11 @@ shinyServer(function(input, output, session) {
         sWB = values$sWB,
         sPeriod = values$sPeriod
       )
-    values$resObs <- df
+    if(nrow(df)>0){
+      values$resObs <- df
+    }else{
+      values$resObs <- ""
+    }
    
   })
   
@@ -683,7 +687,7 @@ shinyServer(function(input, output, session) {
     
     output$plotObs <- renderPlot({
       if (values$resObs == "") {
-        p <- ""
+        p <- 0
       } else{
         yvar <- vars[length(vars)]
     
