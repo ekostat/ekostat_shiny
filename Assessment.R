@@ -62,7 +62,7 @@ Assessment <-
             # We need to set these before calling the O2 indicator
             # Indicator functions need to be modified so that thus information is sent as parameters in the function call!
             
-            if(iInd=="Oxygen"){
+            if (grepl("Oxygen",iInd,fixed=TRUE)) {
               BoundariesHypoxicArea <<- df.bounds.hypox %>% filter(WB==wblist$WB[iWB]) %>% select(RefCond,H.G,G.M,M.P,P.B,Worst) %>% as.list()
               WB_bathymetry <<- df.bathy %>% filter(WB==wblist$WB[iWB]) %>% select(area_pct,depth)
             }
