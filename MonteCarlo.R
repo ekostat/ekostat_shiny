@@ -87,3 +87,4 @@ resErr <- AssessmentResults[[3]]
 
 cat(paste0("Time elapsed: ",Sys.time() - start_time))
 
+save(AssessmentResults,file="AssessmentResults.Rda")
