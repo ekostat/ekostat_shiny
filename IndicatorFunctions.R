@@ -276,14 +276,15 @@ CalculateIndicator <-
                     CoastBQI          = identity,
                     CoastMSMDI        = plogis) 
 # Switch year for winter months (Nov+Dec) to include together with (Jan+Feb)
-    if (Indicator %in% c("TNwinter","TNwinterEQR","TPwinter","TPwinterEQR")) {
+    if (Indicator %in% c("CoastTNwinter","CoastTNwinterEQR","CoastTPwinter","CoastTPwinterEQR")) {
       df <- mutate(df,year=ifelse(month %in% c(11,12),year+1,year))
     }
 # Filter dataframe to include observations used in indicator only
     df <- Filter_df(df,MonthInclude,startyear,endyear)    
 # setting RefCond depending on salinity for indicators with salinity correction
     RefCond <- mat.or.vec(nrow(df), 1)
-    if (Indicator %in% c("ChlaEQR","SecchiEQR","DINsummerEQR","DIPsummerEQR","TNsummerEQR","TPsummerEQR","TNwinterEQR","TPwinterEQR")) {
+    if (Indicator %in% c("CoastChlaEQR","CoastSecchiEQR","CoastDINsummerEQR","CoastDIPsummerEQR",
+                         "CoastTNsummerEQR","CoastTPsummerEQR","CoastTNwinterEQR","CoastTPwinterEQR")) {
        df <- filter(df,!is.na(sali))
        RefCond <- mat.or.vec(nrow(df), 1)
        sali_class <- findInterval(df$sali, c(seq(0, 35)))
@@ -332,6 +333,7 @@ CalculateIndicator <-
     simresyear <- g_fun_inv(g_fun(simresyear)-g_fun(apply(simresyear,1,mean))+g_fun(mu_indicator$yearmeans$xvar))
     
 # Calculate statistics
+    #browser()
     period <- data.frame(mean=mean(simres),stderr=sd(simres),lower = quantile(simres,probs=c((1-confidence_lvl)/2)),upper = quantile(simres,probs=c(1-(1-confidence_lvl)/2)),row.names = NULL)
     annual <- data.frame(year = mu_indicator$yearmeans$year,
                          mean = apply(simresyear,1,mean),

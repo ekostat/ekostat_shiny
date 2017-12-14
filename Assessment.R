@@ -176,7 +176,7 @@ Assessment <-
             }
           } #for(iSub in 1:subcount)
           
-          incProgress(progfrac,detail=paste(wblist$WB[iWB],plist$period[iPeriod]))
+          #incProgress(progfrac,detail=paste(wblist$WB[iWB],plist$period[iPeriod]))
         } #for(iInd in IndicatorList)
       }  #for(iPeriod in 1:pcount) 
     }    #for(iWB in 1:wbcount)
