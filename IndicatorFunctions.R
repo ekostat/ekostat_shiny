@@ -112,6 +112,23 @@ OxygenTest2 <- function(df) {
   df <- filter(df,!is.na(xvar))
   # create list of years for producing vectors of similar length in the returned list
   years <- df %>% group_by(year) %>% summarise()
+  
+  #list profiles having at least 2 observations (this is superceded by the test of two distinct values of xvar)
+  #profiles <- df %>% group_by(station,date,time,station_depth) %>% summarise(n_obs=n()) %>% filter(n_obs>1) %>% select(-n_obs)
+  
+  #select only data from profiles having at least 2 observations
+  #df <- left_join(profiles, df, by=c("station", "date", "time", "station_depth"))
+  
+  #list profiles having at least 2 distinct values of xvar (O2)
+  # we can't interpolate to find cline depth between two identical O2 values! 
+  #distinct_xvalues <- df %>% group_by(station,date,time,station_depth,xvar) %>% summarise() %>%
+  #  ungroup() %>% group_by(station,date,time,station_depth) %>% summarise(n_xvar=n()) %>% filter(n_xvar>1) %>% select(-n_xvar)
+  
+  #select only data from profiles having at least 2 distinct values of xvar (O2)
+  #df <- left_join(distinct_xvalues, df, by=c("station", "date", "time", "station_depth"))
+  
+  # create list of years for producing vectors of similar length in the returned list
+  #years <- df %>% group_by(year) %>% summarise()
   # find depth for 3.5 ml/l by extrapolation, when this threshold is not in the profile
   O2bottom_ext <- df %>% group_by(station,date,time,station_depth) %>% summarise(O2bottom1 = xvar[which.max(depth)],O2bottom2 = xvar[which.max(depth)-1],depth1 = depth[which.max(depth)],depth2 = depth[which.max(depth)-1],n_obs =n(),
                    O2clinedepth_max=ifelse(n_obs>1,ifelse(O2bottom1>3.5 && O2bottom2-O2bottom1>0,depth1+(3.5-O2bottom1)/(O2bottom2-O2bottom1)*(depth2-depth1),1000),NaN))
@@ -323,8 +340,8 @@ CalculateIndicator <-
          simresyear[,isim]=simul_indicator$yearmeans$xvar
          simres[isim] <- simul_indicator$periodmean
       } else{
-        simresyear[,isim]= c(rep(NA,6))
-        simresyear[isim]= NA
+        simresyear[,isim]<- NA # c(rep(NA,6))
+        simres[isim] <- NA
       }
     } # end simulation loop
     
@@ -333,7 +350,6 @@ CalculateIndicator <-
     simresyear <- g_fun_inv(g_fun(simresyear)-g_fun(apply(simresyear,1,mean))+g_fun(mu_indicator$yearmeans$xvar))
     
 # Calculate statistics
-    #browser()
     period <- data.frame(mean=mean(simres),stderr=sd(simres),lower = quantile(simres,probs=c((1-confidence_lvl)/2)),upper = quantile(simres,probs=c(1-(1-confidence_lvl)/2)),row.names = NULL)
     annual <- data.frame(year = mu_indicator$yearmeans$year,
                          mean = apply(simresyear,1,mean),

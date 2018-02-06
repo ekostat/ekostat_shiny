@@ -1,6 +1,7 @@
 # Offline processing of indicators
 # Do Monte Carlo simulations based on variance components
-# Save results to be used by shiny app
+# Save results to be used by shiny app as R data file 
+# AssessmentResults.Rda
 
 rm(list = ls())
 
@@ -87,4 +88,4 @@ resErr <- AssessmentResults[[3]]
 
 cat(paste0("Time elapsed: ",Sys.time() - start_time))
 
-save(AssessmentResults,file="AssessmentResults.Rda")
+#save(AssessmentResults,file="AssessmentResults.Rda")

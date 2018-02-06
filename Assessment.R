@@ -31,14 +31,18 @@ Assessment <-
     
     # Loop through distinct waterbodies and periods in the data
     for(iWB in 1:wbcount){
+      cat(paste0("WB: ",wblist$WB[iWB]," (",iWB," of ",wbcount ,")\n"))
       df.temp<-df.all %>% filter(WB == wblist$WB[iWB])
       plist<-distinct(df.all,period)
       pcount<-nrow(plist)
-      typology<-df.temp[1,"typology"]
+      typology<-as.character(df.temp[1,"typology"])
       
+      cat(paste0("  Period: "))
       for(iPeriod in 1:pcount){
+        
         df <- df.all %>% filter(WB == wblist$WB[iWB],period == plist$period[iPeriod])
-        cat(paste0("WB: ",wblist$WB[iWB],"  Period: ",plist$period[iPeriod],"\n"))
+        #cat(paste0("WB: ",wblist$WB[iWB]," (",iWB," of ",wbcount ,")  Period: ",plist$period[iPeriod],"\n"))
+        cat(paste0(plist$period[iPeriod]," "))
         
         # Get start and end years from the period text (e.g. "2001-2006")
         startyear<-as.numeric(substr(as.character(plist$period[iPeriod]),1,4))
@@ -65,6 +69,18 @@ Assessment <-
             if (grepl("Oxygen",iInd,fixed=TRUE)) {
               BoundariesHypoxicArea <<- df.bounds.hypox %>% filter(WB==wblist$WB[iWB]) %>% select(RefCond,H.G,G.M,M.P,P.B,Worst) %>% as.list()
               WB_bathymetry <<- df.bathy %>% filter(WB==wblist$WB[iWB]) %>% select(area_pct,depth)
+              if(!nrow(WB_bathymetry)>0){
+                #cat(paste0("No bathymetry information for ",wblist$WB[iWB],"\n"))
+                # the following 3 lines should be removed - they create a false bathymetry dataset 
+                area_pct<-seq(1,100,by=1) 
+                depth<-area_pct
+                WB_bathymetry<<-data.frame(area_pct,depth)
+              }
+              if(!nrow(df.bounds.hypox %>% filter(WB==wblist$WB[iWB]))>0){
+                #cat(paste0("No Hypoxic Area boundaries for ",wblist$WB[iWB],"\n"))
+                # the following line should be removed - it creates a false hypoxic area boundaries dataset  
+                BoundariesHypoxicArea <<- df.bounds.hypox %>% filter(WB=="SE582000-115270 Byfjorden") %>% select(RefCond,H.G,G.M,M.P,P.B,Worst) %>% as.list()
+              }
             }
             
             
@@ -78,7 +94,7 @@ Assessment <-
               df.temp$Type<-wblist$typology[iWB]
               df.temp$Period<-plist$period[iPeriod]
               df.temp$Code<-res$result_code
-              cat(paste0("Indicator: ",iInd,"  Result: ",res$result_code,"\n"))
+              #cat(paste0("Indicator: ",iInd,"  Result: ",res$result_code,"\n"))
               
               if(exists("res.ind")){
                 res.ind<-bind_rows(res.ind,df.temp)
@@ -133,7 +149,7 @@ Assessment <-
               df.temp$Type<-wblist$typology[iWB]
               df.temp$Period<-plist$period[iPeriod]
               df.temp$Code<-res$result_code
-              cat(paste0("Indicator: ",iInd,"  Result: ",res$result_code,"\n"))
+              #cat(paste0("Indicator: ",iInd,"  Result: ",res$result_code,"\n"))
               
               if(exists("res.ind")){
                 res.ind<-bind_rows(res.ind,df.temp)
@@ -179,7 +195,8 @@ Assessment <-
           #incProgress(progfrac,detail=paste(wblist$WB[iWB],plist$period[iPeriod]))
         } #for(iInd in IndicatorList)
       }  #for(iPeriod in 1:pcount) 
-    }    #for(iWB in 1:wbcount)
+      cat(paste0("\n"))
+      }    #for(iWB in 1:wbcount)
     #---------------------- Summarise results --------------------------
     # Get indicator categories based on mean values
     
@@ -386,7 +403,7 @@ IndicatorResults<-function(df,typology,df.bounds,df.indicators,df.variances,indi
   RefCond_sali<-SalinityReferenceValues(df.bounds,typology,indicator,missing)
   MonthInclude <- IndicatorMonths(df.months,typology,indicator)
   variance_list<- VarianceComponents(df.indicators,df.variances,typology,indicator)
-  cat(paste0(indicator,"\n"))
+  #cat(paste0(indicator,"\n"))
   
   res<-CalculateIndicator(indicator,df,RefCond_sali,variance_list,MonthInclude,startyear,endyear,n_iter=nsim)
 
